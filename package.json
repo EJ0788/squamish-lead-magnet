@@ -1,0 +1,13 @@
+{
+  "name": "squamish-lead-magnet",
+  "version": "1.0.0",
+  "description": "Lead capture form for Squamish Real Estate with Lofty CRM integration",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  }
+}

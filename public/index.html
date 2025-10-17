@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get instant access to comprehensive Squamish BC real estate development information">
+    <title>Squamish Real Estate Developments | New Construction Guide</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #1a202c;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #2d3748;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f7fafc;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .phone-verify-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .phone-verify-group input {
+            flex: 1;
+        }
+
+        .verify-btn {
+            padding: 14px 20px;
+            background: #48bb78;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+
+        .verify-btn:hover:not(:disabled) {
+            background: #38a169;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(72, 187, 120, 0.3);
+        }
+
+        .verify-btn:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .code-input {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .code-input.active {
+            display: block;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #48bb78;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        .success-message h2 {
+            color: #1a202c;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .success-message p {
+            color: #718096;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .access-btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .access-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .error-message {
+            color: #e53e3e;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.6s linear infinite;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .phone-verify-group {
+                flex-direction: column;
+            }
+
+            .verify-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏔️ Squamish Real Estate Developments</h1>
+            <p>Get instant access to our comprehensive guide featuring all current developments with direct links to PDFs, floor plans, and pricing.</p>
+        </div>
+
+        <form id="leadForm">
+            <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+                <div class="error-message" id="firstNameError">Please enter your first name</div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
+                <div class="error-message" id="lastNameError">Please enter your last name</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required autocomplete="email">
+                <div class="error-message" id="emailError">Please enter a valid email address</div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <div class="phone-verify-group">
+                    <input type="tel" id="phone" name="phone" placeholder="(604) 555-1234" required autocomplete="tel">
+                    <button type="button" class="verify-btn" id="verifyBtn">Verify</button>
+                </div>
+                <div class="error-message" id="phoneError">Please enter a valid phone number</div>
+                
+                <div class="code-input" id="codeInput">
+                    <label for="verificationCode">Verification Code</label>
+                    <input type="text" id="verificationCode" name="verificationCode" placeholder="Enter 6-digit code" maxlength="6" autocomplete="one-time-code">
+                    <div class="error-message" id="codeError">Please enter the verification code</div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn" disabled>
+                Get Instant Access
+            </button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+            <div class="success-icon">
+                <svg viewBox="0 0 52 52">
+                    <polyline points="14 27 22 35 38 19"/>
+                </svg>
+            </div>
+            <h2>You're All Set!</h2>
+            <p>Check your email for your unique access link. It's valid for 7 days and includes all the latest Squamish development information.</p>
+            <a href="#" class="access-btn" id="accessBtn">Access Your Guide Now</a>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        let state = {
+            phoneVerified: false,
+            verificationCode: null,
+            verificationSent: false
+        };
+
+        // DOM elements
+        const form = document.getElementById('leadForm');
+        const verifyBtn = document.getElementById('verifyBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const codeInput = document.getElementById('codeInput');
+        const successMessage = document.getElementById('successMessage');
+        const accessBtn = document.getElementById('accessBtn');
+
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 10) value = value.slice(0, 10);
+            
+            if (value.length >= 6) {
+                value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6)}`;
+            } else if (value.length >= 3) {
+                value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
+            }
+            
+            e.target.value = value;
+            
+            // Reset verification if phone changes after verification
+            if (state.verificationSent) {
+                state.phoneVerified = false;
+                state.verificationSent = false;
+                submitBtn.disabled = true;
+                codeInput.classList.remove('active');
+                document.getElementById('verificationCode').value = '';
+            }
+        });
+
+        // Phone verification
+        verifyBtn.addEventListener('click', async () => {
+            const phoneInput = document.getElementById('phone');
+            const phone = phoneInput.value.replace(/\D/g, '');
+            
+            if (phone.length !== 10) {
+                showError('phoneError', 'Please enter a valid 10-digit phone number');
+                return;
+            }
+
+            hideError('phoneError');
+            verifyBtn.disabled = true;
+            verifyBtn.innerHTML = '<span class="loading"></span>Sending...';
+
+            try {
+                const response = await fetch('/api/submit-lead', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        action: 'sendVerification',
+                        phone: phone 
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    state.verificationSent = true;
+                    state.verificationCode = data.code; // In production, this wouldn't be returned
+                    verifyBtn.textContent = 'Resend Code';
+                    verifyBtn.disabled = false;
+                    codeInput.classList.add('active');
+                    
+                    // Auto-focus on code input
+                    setTimeout(() => {
+                        document.getElementById('verificationCode').focus();
+                    }, 100);
+                } else {
+                    throw new Error(data.error || 'Failed to send verification');
+                }
+            } catch (error) {
+                console.error('Verification error:', error);
+                showError('phoneError', 'Failed to send verification code. Please try again.');
+                verifyBtn.textContent = 'Verify';
+                verifyBtn.disabled = false;
+            }
+        });
+
+        // Verify code input
+        document.getElementById('verificationCode').addEventListener('input', (e) => {
+            const code = e.target.value;
+            if (code.length === 6) {
+                // In production, verify with server
+                if (code === state.verificationCode) {
+                    state.phoneVerified = true;
+                    submitBtn.disabled = false;
+                    hideError('codeError');
+                    e.target.style.borderColor = '#48bb78';
+                } else {
+                    showError('codeError', 'Invalid verification code');
+                    e.target.style.borderColor = '#e53e3e';
+                }
+            }
+        });
+
+        // Form submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!state.phoneVerified) {
+                showError('phoneError', 'Please verify your phone number first');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading"></span>Processing...';
+
+            const formData = {
+                action: 'submitLead',
+                firstName: document.getElementById('firstName').value.trim(),
+                lastName: document.getElementById('lastName').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value,
+                source: 'Squamish Real Estate Lead Magnet',
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                const response = await fetch('/api/submit-lead', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Show success
+                    form.style.display = 'none';
+                    successMessage.classList.add('active');
+                    accessBtn.href = data.accessUrl;
+                    
+                    // Track conversion (Google Ads conversion tracking goes here)
+                    if (window.gtag) {
+                        gtag('event', 'conversion', {
+                            'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
+                            'value': 1.0,
+                            'currency': 'CAD'
+                        });
+                    }
+                } else {
+                    throw new Error(data.error || 'Submission failed');
+                }
+            } catch (error) {
+                console.error('Submission error:', error);
+                alert('There was an error processing your request. Please try again or contact us directly.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Get Instant Access';
+            }
+        });
+
+        function showError(elementId, message) {
+            const errorEl = document.getElementById(elementId);
+            errorEl.textContent = message;
+            errorEl.classList.add('active');
+        }
+
+        function hideError(elementId) {
+            const errorEl = document.getElementById(elementId);
+            if (errorEl) {
+                errorEl.classList.remove('active');
+            }
+        }
+
+        // Clear errors on input
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => {
+                const errorId = input.id + 'Error';
+                hideError(errorId);
+            });
+        });
+    </script>
+</body>
+</html>
