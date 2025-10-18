@@ -207,7 +207,7 @@ async function sendAccessEmail(leadData) {
   // ============================================
   const resendApiKey = process.env.RESEND_API_KEY;
   
-  if (resendApiKey) {
+if (resendApiKey) {
     try {
       const response = await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -216,7 +216,7 @@ async function sendAccessEmail(leadData) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          from: 'from: 'Squamish Real Estate <onboarding@resend.dev>',', // Update with your domain
+          from: 'Squamish Real Estate <onboarding@resend.dev>',
           to: leadData.email,
           subject: '🏔️ Your Squamish Real Estate Developments Guide',
           html: generateEmailHTML(leadData)
