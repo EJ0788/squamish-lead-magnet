@@ -49,7 +49,7 @@ async function handlePhoneVerification(req, res) {
   // OPTION A: Twilio SMS (Recommended for Production)
   // ============================================
   // Uncomment this section when you're ready to use Twilio
-  /*
+  
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
   const twilioPhone = process.env.TWILIO_PHONE_NUMBER;
@@ -73,12 +73,14 @@ async function handlePhoneVerification(req, res) {
   if (!twilioResponse.ok) {
     throw new Error('Failed to send SMS');
   }
-  */
-
+  
+/*
   // ============================================
   // OPTION B: Demo Mode (For Testing)
   // ============================================
+  
   console.log(`Verification code for ${phone}: ${verificationCode}`);
+  */
 
   // In production, store this in a database or cache with expiration
   // For now, we'll return it (NOT SECURE - only for demo)
