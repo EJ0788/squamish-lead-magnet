@@ -200,7 +200,7 @@ if (resendApiKey) {
         body: JSON.stringify({
           from: 'Squamish Real Estate <onboarding@resend.dev>',
           to: leadData.email,
-          subject: '🏔️ Your Squamish Real Estate Developments Guide',
+          subject: 'Your All-Access Hub for New Builds in Squamish 🏔️',
           html: generateEmailHTML(leadData)
         })
       });
@@ -232,7 +232,7 @@ if (resendApiKey) {
       body: JSON.stringify({
         personalizations: [{ to: [{ email: leadData.email }] }],
         from: { email: 'noreply@yourdomain.com', name: 'Squamish Real Estate' },
-        subject: '🏔️ Your Squamish Real Estate Developments Guide',
+        subject: 'Your All-Access Hub for New Builds in Squamish 🏔️',
         content: [{ type: 'text/html', value: generateEmailHTML(leadData) }]
       })
     });
@@ -263,7 +263,7 @@ function generateEmailHTML(leadData) {
               <tr>
                 <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 30px; text-align: center;">
                   <h1 style="color: white; margin: 0; font-size: 28px;">🏔️ Welcome!</h1>
-                  <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 16px;">Your Squamish Real Estate Guide is Ready</p>
+                  <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 16px;">Your Squamish New Construction Guide is ready!</p>
                 </td>
               </tr>
               
@@ -275,15 +275,19 @@ function generateEmailHTML(leadData) {
                   </p>
                   
                   <p style="margin: 0 0 20px 0; color: #2d3748; font-size: 16px; line-height: 1.6;">
-                    Thank you for your interest in Squamish real estate! Your comprehensive development guide is now ready with:
+                    This isn’t just another download — it’s your always-up-to-date hub for every active development in Squamish, curated directly from real estate advisors with boots on the ground. Inside you’ll get:
                   </p>
                   
                   <ul style="color: #2d3748; font-size: 16px; line-height: 1.8; margin: 0 0 30px 0;">
-                    <li>Direct links to all current development PDFs</li>
-                    <li>Floor plans and pricing information</li>
-                    <li>Location maps and amenities</li>
-                    <li>Developer contact information</li>
+                    <li><b>Direct access to all current floor plans and pricing </b> — straight from the source, no outdated info</li>
+                    <li><b>Live development updates </b> as new phases, incentives, and releases roll out</li>
+                    <li><b>interactive maps and amenity details </b> to help you visualize the community fit</li>
+                    <li><b>Developer contact info </b> so you can get answers fast</li>
                   </ul>
+
+                  <p style="margin: 0 0 20px 0; color: #2d3748; font-size: 16px; line-height: 1.6;">
+                    Whether you’re comparing options, watching the market, or ready to take the next step, this guide keeps you one click away from everything happening in Squamish real estate — 24/7.
+                  </p>
                   
                   <div style="text-align: center; margin: 30px 0;">
                     <a href="${leadData.accessUrl}" 
@@ -293,7 +297,7 @@ function generateEmailHTML(leadData) {
                   </div>
                   
                   <p style="margin: 30px 0 0 0; color: #718096; font-size: 14px; line-height: 1.6;">
-                    <strong>Note:</strong> This link is valid for 7 days. If you have any questions about specific developments, feel free to reach out!
+                    <strong>Note:</strong>  <i>Keep this email handy or bookmark the page — it’s your shortcut to staying in the loop on Squamish’s latest new builds. Got questions about a specific project? I’m happy to help anytime. </i>
                   </p>
                 </td>
               </tr>
@@ -302,7 +306,7 @@ function generateEmailHTML(leadData) {
               <tr>
                 <td style="background-color: #f7fafc; padding: 30px; text-align: center; border-top: 1px solid #e2e8f0;">
                   <p style="margin: 0; color: #718096; font-size: 14px;">
-                    Squamish Real Estate | Vancouver, BC
+                    www.corridorhomes.ca | Eric Johnson | Engel & Völkers Squamish 
                   </p>
                   <p style="margin: 10px 0 0 0; color: #a0aec0; font-size: 12px;">
                     You received this email because you requested access to our Squamish development guide.
