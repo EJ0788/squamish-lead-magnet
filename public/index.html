@@ -386,10 +386,15 @@
             }
         });
 
-        // Phone verification
+       // Phone verification
         verifyBtn.addEventListener('click', async () => {
             const phoneInput = document.getElementById('phone');
-            const phone = phoneInput.value.replace(/\D/g, '');
+            let phone = phoneInput.value.replace(/\D/g, '');
+            
+            // Remove leading 1 if present
+            if (phone.startsWith('1') && phone.length === 11) {
+                phone = phone.slice(1);
+            }
             
             if (phone.length !== 10) {
                 showError('phoneError', 'Please enter a valid 10-digit phone number');
