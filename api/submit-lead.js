@@ -180,22 +180,6 @@ async function sendToLofty(leadData) {
   }
 }
 
-  // ============================================
-  // OPTION B: Webhook (if using Make.com or similar)
-  // ============================================
-  /*
-  const webhookUrl = process.env.LOFTY_WEBHOOK_URL;
-  
-  if (webhookUrl) {
-    await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(leadData)
-    });
-  }
-  */
-}
-
 // ==========================================
 // EMAIL DELIVERY
 // ==========================================
