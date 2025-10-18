@@ -216,7 +216,7 @@ async function sendAccessEmail(leadData) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          from: 'Squamish Real Estate <noreply@yourdomain.com>', // Update with your domain
+          from: 'from: 'Squamish Real Estate <onboarding@resend.dev>',', // Update with your domain
           to: leadData.email,
           subject: '🏔️ Your Squamish Real Estate Developments Guide',
           html: generateEmailHTML(leadData)
