@@ -148,39 +148,37 @@ async function sendToLofty(leadData) {
     return;
   }
 
-  // ============================================
-  // OPTION A: Direct Lofty API
-  // ============================================
   try {
-    const response = await fetch('https://api.lofty.com/v1/leads', {
+    // Try the standard Lofty API endpoint
+    const response = await fetch('https://api.lofty.com/v1/lead', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${loftyApiKey}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
       body: JSON.stringify({
         first_name: leadData.firstName,
         last_name: leadData.lastName,
         email: leadData.email,
         phone: leadData.phone.replace(/\D/g, ''),
-        source: leadData.source,
-        tags: ['Squamish', 'Lead Magnet', 'Real Estate'],
-        custom_fields: {
-          access_token: leadData.accessToken,
-          access_url: leadData.accessUrl
-        }
+        source: leadData.source
       })
     });
 
+    const responseData = await response.json();
+    
     if (!response.ok) {
-      throw new Error(`Lofty API error: ${response.status}`);
+      console.error('Lofty API error:', response.status, responseData);
+      throw new Error(`Lofty API error: ${response.status} - ${JSON.stringify(responseData)}`);
     }
 
-    console.log('Lead sent to Lofty successfully');
+    console.log('Lead sent to Lofty successfully:', responseData);
   } catch (error) {
-    console.error('Lofty integration error:', error);
-    // Don't throw - we still want to send the email even if Lofty fails
+    console.error('Lofty integration error:', error.message);
+    // Don't throw - we still want the email to send
   }
+}
 
   // ============================================
   // OPTION B: Webhook (if using Make.com or similar)
