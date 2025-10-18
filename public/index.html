@@ -487,22 +487,25 @@
 
                 const data = await response.json();
 
-                if (response.ok) {
-                    // Show success
-                    form.style.display = 'none';
-                    successMessage.classList.add('active');
-                    accessBtn.href = data.accessUrl;
-                    
-                    // Track conversion (Google Ads conversion tracking goes here)
-                    if (window.gtag) {
-                        gtag('event', 'conversion', {
-                            'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
-                            'value': 1.0,
-                            'currency': 'CAD'
-                        });
-                    }
-                } else {
-                    throw new Error(data.error || 'Submission failed');
+               if (response.ok) {
+    // Show success
+    form.style.display = 'none';
+    successMessage.classList.add('active');
+    
+    // Set the Gamma link directly
+    accessBtn.href = 'https://gamma.app/docs/New-Builds-Squamish-The-Central-Hub-for-Pricing-Floorplans-Launch-w7yus6vxknp7633';
+    
+    // Track conversion (Google Ads conversion tracking goes here)
+    if (window.gtag) {
+        gtag('event', 'conversion', {
+            'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
+            'value': 1.0,
+            'currency': 'CAD'
+        });
+    }
+} else {
+    throw new Error(data.error || 'Submission failed');
+}
                 }
             } catch (error) {
                 console.error('Submission error:', error);
