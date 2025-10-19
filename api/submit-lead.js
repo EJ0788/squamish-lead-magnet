@@ -149,13 +149,12 @@ async function sendToLofty(leadData) {
   }
 
   try {
-    // Try the standard Lofty API endpoint
-    const response = await fetch('https://api.lofty.com/v1/lead', {
+    // Use the CRM endpoint instead
+    const response = await fetch('https://crm.lofty.com/api/lead', {
       method: 'POST',
       headers: {
-     'Authorization': `token ${loftyApiKey}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Authorization': `token ${loftyApiKey}`,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         first_name: leadData.firstName,
@@ -166,14 +165,18 @@ async function sendToLofty(leadData) {
       })
     });
 
-    const responseData = await response.json();
-    
+    // Log the raw response to see what we're getting
+    const responseText = await response.text();
+    console.log('Lofty raw response:', response.status, responseText);
+
     if (!response.ok) {
-      console.error('Lofty API error:', response.status, responseData);
-      throw new Error(`Lofty API error: ${response.status} - ${JSON.stringify(responseData)}`);
+      throw new Error(`Lofty API error: ${response.status} - ${responseText}`);
     }
 
+    // Try to parse as JSON
+    const responseData = JSON.parse(responseText);
     console.log('Lead sent to Lofty successfully:', responseData);
+    
   } catch (error) {
     console.error('Lofty integration error:', error.message);
     // Don't throw - we still want the email to send
