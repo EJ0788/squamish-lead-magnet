@@ -153,7 +153,7 @@ async function sendToLofty(leadData) {
     const response = await fetch('https://api.lofty.com/v1/lead', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${loftyApiKey}`,
+     'Authorization': `token ${loftyApiKey}`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
