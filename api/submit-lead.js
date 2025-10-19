@@ -201,7 +201,7 @@ if (resendApiKey) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          from: 'Squamish Real Estate <onboarding@resend.dev>',
+          from: 'Squamish Real Estate <noreply@mail.corridorhomes.ca>',
           to: leadData.email,
           subject: 'Your All-Access Hub for New Builds in Squamish 🏔️',
           html: generateEmailHTML(leadData)
