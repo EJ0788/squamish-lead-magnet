@@ -141,48 +141,38 @@ async function handleLeadSubmission(req, res) {
 // LOFTY CRM INTEGRATION
 // ==========================================
 async function sendToLofty(leadData) {
-  const loftyApiKey = process.env.LOFTY_API_KEY;
+  const zapierWebhookUrl = process.env.ZAPIER_WEBHOOK_URL;
   
-  if (!loftyApiKey) {
-    console.warn('Lofty API key not configured');
+  if (!zapierWebhookUrl) {
+    console.warn('Zapier webhook not configured');
     return;
   }
 
   try {
-    // Use the CRM endpoint instead
-    const response = await fetch('https://crm.lofty.com/api/lead', {
+    const response = await fetch(zapierWebhookUrl, {
       method: 'POST',
       headers: {
-        'Authorization': `token ${loftyApiKey}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        first_name: leadData.firstName,
-        last_name: leadData.lastName,
+        firstName: leadData.firstName,
+        lastName: leadData.lastName,
         email: leadData.email,
-        phone: leadData.phone.replace(/\D/g, ''),
-        source: leadData.source
+        phone: leadData.phone,
+        source: leadData.source,
+        timestamp: leadData.timestamp
       })
     });
 
-    // Log the raw response to see what we're getting
-    const responseText = await response.text();
-    console.log('Lofty raw response:', response.status, responseText);
-
     if (!response.ok) {
-      throw new Error(`Lofty API error: ${response.status} - ${responseText}`);
+      throw new Error(`Zapier webhook error: ${response.status}`);
     }
 
-    // Try to parse as JSON
-    const responseData = JSON.parse(responseText);
-    console.log('Lead sent to Lofty successfully:', responseData);
-    
+    console.log('Lead sent to Zapier successfully');
   } catch (error) {
-    console.error('Lofty integration error:', error.message);
-    // Don't throw - we still want the email to send
+    console.error('Zapier integration error:', error.message);
   }
 }
-
 // ==========================================
 // EMAIL DELIVERY
 // ==========================================
