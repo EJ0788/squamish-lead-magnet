@@ -148,27 +148,37 @@ async function sendToLofty(leadData) {
     return;
   }
 
+  // Normalize phone to E.164 format
+  const phoneDigits = leadData.phone.replace(/\D/g, '');
+  const e164Phone = phoneDigits.length === 10 ? `+1${phoneDigits}` : `+${phoneDigits}`;
+
+  const payload = {
+    firstName: leadData.firstName,
+    lastName: leadData.lastName,
+    email: leadData.email,
+    phone: e164Phone,
+    emails: [leadData.email],
+    phones: [e164Phone],
+    source: leadData.source || 'Squamish Real Estate New Dev Lead Magnet',
+    tags: ['Squamish New Development', 'Website Lead'],
+    notes: ''
+  };
+
   try {
-    const response = await fetch('https://api.lofty.com/leads', {
+    const response = await fetch('https://api.lofty.com/v1.0/leads', {
       method: 'POST',
       headers: {
         'Authorization': `token ${loftyApiKey}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        firstName: leadData.firstName,
-        lastName: leadData.lastName,
-        email: leadData.email,
-        phone: leadData.phone.replace(/\D/g, ''),
-        source: leadData.source
-      })
+      body: JSON.stringify(payload)
     });
 
     const responseText = await response.text();
     console.log('Lofty response:', response.status, responseText);
 
     if (!response.ok) {
-      throw new Error(`Lofty API error: ${response.status}`);
+      throw new Error(`Lofty API error: ${response.status} - ${responseText}`);
     }
 
     console.log('Lead sent to Lofty successfully');
