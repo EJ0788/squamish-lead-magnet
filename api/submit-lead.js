@@ -141,36 +141,39 @@ async function handleLeadSubmission(req, res) {
 // LOFTY CRM INTEGRATION
 // ==========================================
 async function sendToLofty(leadData) {
-  const zapierWebhookUrl = process.env.ZAPIER_WEBHOOK_URL;
+  const loftyApiKey = process.env.LOFTY_API_KEY;
   
-  if (!zapierWebhookUrl) {
-    console.warn('Zapier webhook not configured');
+  if (!loftyApiKey) {
+    console.warn('Lofty API key not configured');
     return;
   }
 
   try {
-    const response = await fetch(zapierWebhookUrl, {
+    const response = await fetch('https://api.lofty.com/leads', {
       method: 'POST',
       headers: {
+        'Authorization': `token ${loftyApiKey}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         firstName: leadData.firstName,
         lastName: leadData.lastName,
         email: leadData.email,
-        phone: leadData.phone,
-        source: leadData.source,
-        timestamp: leadData.timestamp
+        phone: leadData.phone.replace(/\D/g, ''),
+        source: leadData.source
       })
     });
 
+    const responseText = await response.text();
+    console.log('Lofty response:', response.status, responseText);
+
     if (!response.ok) {
-      throw new Error(`Zapier webhook error: ${response.status}`);
+      throw new Error(`Lofty API error: ${response.status}`);
     }
 
-    console.log('Lead sent to Zapier successfully');
+    console.log('Lead sent to Lofty successfully');
   } catch (error) {
-    console.error('Zapier integration error:', error.message);
+    console.error('Lofty integration error:', error.message);
   }
 }
 // ==========================================
