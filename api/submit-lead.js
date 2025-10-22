@@ -159,8 +159,8 @@ async function sendToLofty(leadData) {
     phone: e164Phone,
     emails: [leadData.email],
     phones: [e164Phone],
-    source: leadData.source || 'Squamish Real Estate New Dev Lead Magnet',
-    tags: ['Squamish New Development', 'Website Lead'],
+    source: leadData.source || 'Squamish Neighbourhoods Guide Download',
+    tags: ['Squamish Neighbourhoods', 'Website Lead'],
     notes: ''
   };
 
@@ -206,7 +206,7 @@ if (resendApiKey) {
         body: JSON.stringify({
           from: 'Squamish Real Estate <noreply@mail.corridorhomes.ca>',
           to: leadData.email,
-          subject: 'Your All-Access Hub for New Builds in Squamish 🏔️',
+          subject: 'Your Squamish Neighbourhood Guide 🏔️',
           html: generateEmailHTML(leadData)
         })
       });
@@ -238,7 +238,7 @@ if (resendApiKey) {
       body: JSON.stringify({
         personalizations: [{ to: [{ email: leadData.email }] }],
         from: { email: 'noreply@yourdomain.com', name: 'Squamish Real Estate' },
-        subject: 'Your All-Access Hub for New Builds in Squamish 🏔️',
+        subject: 'Your Squamish Neighbourhood Guide Is Ready!🏔️',
         content: [{ type: 'text/html', value: generateEmailHTML(leadData) }]
       })
     });
@@ -268,8 +268,7 @@ function generateEmailHTML(leadData) {
               <!-- Header -->
               <tr>
                 <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 30px; text-align: center;">
-                  <h1 style="color: white; margin: 0; font-size: 28px;">🏔️ Welcome!</h1>
-                  <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 16px;">Your Squamish New Construction Guide is ready!</p>
+                  <h1 style="color: white; margin: 0; font-size: 28px;">Your Squamish Neighbourhood Guide is Ready</h1>
                 </td>
               </tr>
               
@@ -281,18 +280,44 @@ function generateEmailHTML(leadData) {
                   </p>
                   
                   <p style="margin: 0 0 20px 0; color: #2d3748; font-size: 16px; line-height: 1.6;">
-                    This isn’t just another download — it’s your always-up-to-date hub for every active development in Squamish, curated directly from real estate advisors with boots on the ground. Inside you’ll get:
+                    Thanks for requesting the Squamish Neighbourhood Guide. Your access link is below.
                   </p>
+
+                  <h3 style="margin: 30px 0 15px 0; color: #1a202c; font-size: 18px; font-weight: 700;">What's Inside:</h3>
                   
-                  <ul style="color: #2d3748; font-size: 16px; line-height: 1.8; margin: 0 0 30px 0;">
-                    <li><b>Direct access to all current floor plans and pricing </b> — straight from the source, no outdated info</li>
-                    <li><b>Live development updates </b> as new phases, incentives, and releases roll out</li>
-                    <li><b>interactive maps and amenity details </b> to help you visualize the community fit</li>
-                    <li><b>Developer contact info </b> so you can get answers fast</li>
+                  <p style="margin: 15px 0 8px 0; color: #1a202c; font-size: 16px; font-weight: 600; line-height: 1.6;">
+                    Market Intelligence
+                  </p>
+                  <ul style="color: #2d3748; font-size: 15px; line-height: 1.7; margin: 0 0 20px 0; padding-left: 20px;">
+                    <li>Q3 2025 pricing trends across all property types</li>
+                    <li>Single-family homes averaging $1.67M (up 15% this year)</li>
+                    <li>Apartment market surge of 31% in sales activity</li>
+                    <li>Price per square foot analysis by neighbourhood</li>
                   </ul>
 
-                  <p style="margin: 0 0 20px 0; color: #2d3748; font-size: 16px; line-height: 1.6;">
-                    Whether you’re comparing options, watching the market, or ready to take the next step, this guide keeps you one click away from everything happening in Squamish real estate — 24/7.
+                  <p style="margin: 15px 0 8px 0; color: #1a202c; font-size: 16px; font-weight: 600; line-height: 1.6;">
+                    18+ Neighbourhood Deep Dives
+                  </p>
+                  <ul style="color: #2d3748; font-size: 15px; line-height: 1.7; margin: 0 0 20px 0; padding-left: 20px;">
+                    <li>Britannia Beach, Valleycliffe, Downtown Squamish, Sea + Sky, University Heights, Brackendale, and 12 more</li>
+                    <li>Real pros and cons for each area</li>
+                    <li>Average pricing and inventory trends</li>
+                    <li>Best fit for different buyer profiles</li>
+                  </ul>
+
+                  <p style="margin: 15px 0 8px 0; color: #1a202c; font-size: 16px; font-weight: 600; line-height: 1.6;">
+                    Essential Local Intelligence
+                  </p>
+                  <ul style="color: #2d3748; font-size: 15px; line-height: 1.7; margin: 0 0 25px 0; padding-left: 20px;">
+                    <li>School catchment areas and ratings</li>
+                    <li>Best restaurants, cafes, and local hotspots</li>
+                    <li>Outdoor recreation access points</li>
+                    <li>Shopping, amenities, and transportation details</li>
+                    <li>New development projects and growth projections</li>
+                  </ul>
+                  
+                  <p style="margin: 0 0 25px 0; color: #2d3748; font-size: 16px; line-height: 1.6;">
+                    Whether you're comparing neighbourhoods, timing the market, or trying to understand value in different areas — this guide gives you the clarity to move forward.
                   </p>
                   
                   <div style="text-align: center; margin: 30px 0;">
@@ -302,8 +327,8 @@ function generateEmailHTML(leadData) {
                     </a>
                   </div>
                   
-                  <p style="margin: 30px 0 0 0; color: #718096; font-size: 14px; line-height: 1.6;">
-                    <strong>Note:</strong>  <i>Keep this email handy or bookmark the page — it’s your shortcut to staying in the loop on Squamish’s latest new builds. Got questions about a specific project? I’m happy to help anytime. </i>
+                  <p style="margin: 25px 0 0 0; color: #718096; font-size: 14px; line-height: 1.6;">
+                    Bookmark this page and reference it anytime. Questions about a specific neighbourhood? Hit reply.
                   </p>
                 </td>
               </tr>
@@ -312,13 +337,23 @@ function generateEmailHTML(leadData) {
               <tr>
                 <td style="background-color: #f7fafc; padding: 30px; text-align: center; border-top: 1px solid #e2e8f0;">
                   <p style="margin: 0; color: #718096; font-size: 14px;">
-                    www.corridorhomes.ca | Eric Johnson | Engel & Völkers Squamish 
+                    Eric Johnson | Engel & Völkers Squamish
                   </p>
-                  <p style="margin: 10px 0 0 0; color: #a0aec0; font-size: 12px;">
-                    You received this email because you requested access to our Squamish development guide.
+                  <p style="margin: 5px 0 0 0; color: #718096; font-size: 14px;">
+                    www.corridorhomes.ca
                   </p>
                 </td>
               </tr>
+              
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+  `;
+}
+           
               
             </table>
           </td>
