@@ -1,4 +1,4 @@
-// Vercel Serverless Function for Lead Processing
+// Vercel Serverless Function for Lead Processing (EMAIL ONLY VERSION)
 // Path: api/submit-lead.js
 
 export default async function handler(req, res) {
@@ -12,20 +12,8 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'POST');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  const { action } = req.body;
-
   try {
-    // Handle phone verification
-    if (action === 'sendVerification') {
-      return await handlePhoneVerification(req, res);
-    }
-
-    // Handle lead submission
-    if (action === 'submitLead') {
-      return await handleLeadSubmission(req, res);
-    }
-
-    return res.status(400).json({ error: 'Invalid action' });
+    return await handleLeadSubmission(req, res);
   } catch (error) {
     console.error('Error:', error);
     return res.status(500).json({ error: 'Internal server error' });
@@ -33,78 +21,25 @@ export default async function handler(req, res) {
 }
 
 // ==========================================
-// PHONE VERIFICATION HANDLER
-// ==========================================
-async function handlePhoneVerification(req, res) {
-  const { phone } = req.body;
-
-  if (!phone || phone.length !== 10) {
-    return res.status(400).json({ error: 'Invalid phone number' });
-  }
-
-  // Generate 6-digit verification code
-  const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
-
-  // ============================================
-  // OPTION A: Twilio SMS (Recommended for Production)
-  // ============================================
-  // Uncomment this section when you're ready to use Twilio
-  
-  const accountSid = process.env.TWILIO_ACCOUNT_SID;
-  const authToken = process.env.TWILIO_AUTH_TOKEN;
-  const twilioPhone = process.env.TWILIO_PHONE_NUMBER;
-
-  const twilioUrl = `https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`;
-  
-  const params = new URLSearchParams();
-  params.append('To', `+1${phone}`);
-  params.append('From', twilioPhone);
-  params.append('Body', `Your Squamish Real Estate verification code is: ${verificationCode}`);
-
-  const twilioResponse = await fetch(twilioUrl, {
-    method: 'POST',
-    headers: {
-      'Authorization': 'Basic ' + Buffer.from(`${accountSid}:${authToken}`).toString('base64'),
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: params
-  });
-
-  if (!twilioResponse.ok) {
-    throw new Error('Failed to send SMS');
-  }
-  
-/*
-  // ============================================
-  // OPTION B: Demo Mode (For Testing)
-  // ============================================
-  
-  console.log(`Verification code for ${phone}: ${verificationCode}`);
-  */
-
-  // In production, store this in a database or cache with expiration
-  // For now, we'll return it (NOT SECURE - only for demo)
-  return res.status(200).json({
-    success: true,
-    code: verificationCode, // Remove this in production!
-    message: 'Verification code sent'
-  });
-}
-
-// ==========================================
 // LEAD SUBMISSION HANDLER
 // ==========================================
 async function handleLeadSubmission(req, res) {
-  const { firstName, lastName, email, phone, source, timestamp } = req.body;
+  const { firstName, lastName, email, source, timestamp } = req.body;
 
   // Validate required fields
-  if (!firstName || !lastName || !email || !phone) {
+  if (!firstName || !lastName || !email) {
     return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  // Validate email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: 'Invalid email format' });
   }
 
   // Generate unique access token
   const accessToken = generateAccessToken();
-  const gammaUrl = process.env.GAMMA_URL || 'YOUR_GAMMA_URL_HERE';
+  const gammaUrl = process.env.GAMMA_URL || 'https://squamish-neighbourhood-g-b51q0ml.gamma.site/';
   const accessUrl = `${gammaUrl}?ref=${accessToken}`;
 
   // Prepare lead data
@@ -112,7 +47,6 @@ async function handleLeadSubmission(req, res) {
     firstName,
     lastName,
     email,
-    phone,
     source,
     timestamp,
     accessToken,
@@ -148,20 +82,14 @@ async function sendToLofty(leadData) {
     return;
   }
 
-  // Normalize phone to E.164 format
-  const phoneDigits = leadData.phone.replace(/\D/g, '');
-  const e164Phone = phoneDigits.length === 10 ? `+1${phoneDigits}` : `+${phoneDigits}`;
-
   const payload = {
     firstName: leadData.firstName,
     lastName: leadData.lastName,
     email: leadData.email,
-    phone: e164Phone,
     emails: [leadData.email],
-    phones: [e164Phone],
     source: leadData.source || 'Squamish Neighbourhoods Guide Download',
-    tags: ['Squamish Neighbourhoods', 'Website Lead'],
-    notes: ''
+    tags: ['Squamish Neighbourhoods', 'Website Lead', 'Email Only Lead'],
+    notes: `Lead captured via email-only form. Access token: ${leadData.accessToken}`
   };
 
   try {
@@ -186,16 +114,14 @@ async function sendToLofty(leadData) {
     console.error('Lofty integration error:', error.message);
   }
 }
+
 // ==========================================
 // EMAIL DELIVERY
 // ==========================================
 async function sendAccessEmail(leadData) {
-  // ============================================
-  // OPTION A: Resend (Recommended - Free tier available)
-  // ============================================
   const resendApiKey = process.env.RESEND_API_KEY;
   
-if (resendApiKey) {
+  if (resendApiKey) {
     try {
       const response = await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -221,29 +147,6 @@ if (resendApiKey) {
       console.error('Email sending error:', error);
     }
   }
-
-  // ============================================
-  // OPTION B: SendGrid
-  // ============================================
-  /*
-  const sendgridApiKey = process.env.SENDGRID_API_KEY;
-  
-  if (sendgridApiKey) {
-    await fetch('https://api.sendgrid.com/v3/mail/send', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${sendgridApiKey}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        personalizations: [{ to: [{ email: leadData.email }] }],
-        from: { email: 'noreply@yourdomain.com', name: 'Squamish Real Estate' },
-        subject: 'Your Squamish Neighbourhood Guide Is Ready!🏔️',
-        content: [{ type: 'text/html', value: generateEmailHTML(leadData) }]
-      })
-    });
-  }
-  */
 
   console.log('Email would be sent to:', leadData.email);
 }
@@ -344,16 +247,6 @@ function generateEmailHTML(leadData) {
                   </p>
                 </td>
               </tr>
-              
-            </table>
-          </td>
-        </tr>
-      </table>
-    </body>
-    </html>
-  `;
-}
-           
               
             </table>
           </td>
