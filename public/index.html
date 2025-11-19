@@ -6,9 +6,6 @@
     <meta name="description" content="Complete guide to all new developments in Squamish with current pricing, floor plans, and pre-sale opportunities updated in real-time">
     <title>Squamish New Developments Guide | Current Pricing & Floor Plans</title>
     
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    
     <style>
         * {
             margin: 0;
@@ -18,52 +15,198 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            line-height: 1.5;
+            background: #f7f9fc;
+            line-height: 1.6;
+            color: #2d3748;
         }
 
         .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
-            width: 100%;
-            padding: 40px;
-            animation: slideUp 0.5s ease-out;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .header {
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
+            color: white;
+            padding: 60px 20px 40px;
             text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 20px;
+            margin: -20px 0 40px 0;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Main Content */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+            margin-top: 40px;
+        }
+
+        .content-left h2 {
+            font-size: 32px;
+            color: #1a202c;
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+
+        .content-left h3 {
+            font-size: 20px;
+            color: #1a202c;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Preview Image */
+        .preview-mockup {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
         }
 
-        .header h1 {
+        .preview-mockup img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Benefits List */
+        .benefits {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .benefits li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .benefits li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        /* Perfect For Box */
+        .perfect-for {
+            background: #f0f7f4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .perfect-for h3 {
+            font-size: 18px;
+            color: #1a472a;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .perfect-for ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .perfect-for li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #2d3748;
+        }
+
+        .perfect-for li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: #f7fafc;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .testimonial {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #4a5568;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .testimonial:last-child {
+            margin-bottom: 0;
+        }
+
+        .testimonial-author {
+            font-style: normal;
+            font-weight: 600;
+            color: #2d3748;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        /* Form Section */
+        .form-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 20px;
+        }
+
+        .form-container h3 {
+            font-size: 26px;
             color: #1a202c;
-            font-size: 28px;
-            font-weight: 700;
             margin-bottom: 10px;
         }
 
-        .header p {
+        .form-container .form-subtitle {
             color: #718096;
-            font-size: 16px;
-            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 15px;
         }
 
         .form-group {
@@ -91,15 +234,15 @@
 
         input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #48bb78;
             background: white;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
         }
 
         .submit-btn {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 18px;
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
             color: white;
             border: none;
             border-radius: 10px;
@@ -112,7 +255,7 @@
 
         .submit-btn:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 25px rgba(26, 71, 42, 0.4);
         }
 
         .submit-btn:disabled {
@@ -121,6 +264,19 @@
             transform: none;
         }
 
+        .privacy-text {
+            font-size: 13px;
+            color: #718096;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+
+        .privacy-text a {
+            color: #48bb78;
+            text-decoration: none;
+        }
+
+        /* Success Message */
         .success-message {
             display: none;
             text-align: center;
@@ -144,11 +300,18 @@
         }
 
         @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        @keyframes slideUp {
             from {
-                transform: scale(0);
+                opacity: 0;
+                transform: translateY(30px);
             }
             to {
-                transform: scale(1);
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
@@ -177,7 +340,7 @@
         .access-btn {
             display: inline-block;
             padding: 16px 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
             color: white;
             text-decoration: none;
             border-radius: 10px;
@@ -187,7 +350,7 @@
 
         .access-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 25px rgba(26, 71, 42, 0.4);
         }
 
         .error-message {
@@ -217,73 +380,207 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Mobile Responsive */
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #718096;
+            font-size: 14px;
+        }
+
+        /* Responsive */
         @media (max-width: 968px) {
-            .container {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .form-container {
+                position: relative;
+                top: 0;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero .subtitle {
+                font-size: 18px;
+            }
+
+            .content-left h2 {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
                 padding: 30px 20px;
             }
 
-            .header h1 {
-                font-size: 24px;
+            .hero {
+                padding: 40px 20px 30px;
             }
 
-            .header p {
-                font-size: 15px;
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .stats-bar {
+                font-size: 14px;
+                padding: 15px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>🏗️ Your Complete Squamish New Development Hub</h1>
+        <p class="subtitle">Stop hunting across multiple developer websites and outdated listings. Get instant access to current pricing, detailed floor plans, deposit structures, completion timelines, and pre-sale opportunities for 10+ new developments—all in one place, updated as projects launch.</p>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        ✓ 10+ active projects  •  Prices starting in the $500s  •  Move-in dates as soon as Early '26
+    </div>
+
     <div class="container">
-        <div class="header">
-            <h1>🏗️ Your Complete Squamish New Development Hub</h1>
-            <p>Stop hunting across multiple developer websites and outdated listings. Get instant access to current pricing, detailed floor plans, deposit structures, completion timelines, and pre-sale opportunities for 10+ new developments—all in one place, updated as projects launch.</p>
-        </div>
+        <div class="content-wrapper">
+            <!-- Left Content -->
+            <div class="content-left">
+                <h2>Everything you need to compare and evaluate every new development in Squamish—without the tab overload</h2>
 
-        <form id="leadForm">
-            <div class="form-group">
-                <label for="firstName">First Name *</label>
-                <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
-                <div class="error-message" id="firstNameError">Please enter your first name</div>
+                <!-- Preview Mockup -->
+                <div class="preview-mockup">
+                    <p style="text-align: center; color: #718096; margin-bottom: 15px; font-size: 14px; font-weight: 600;">INSIDE YOUR NEW DEVELOPMENT HUB:</p>
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&auto=format&fit=crop" alt="New Development Guide Preview" style="margin-bottom: 15px;">
+                    <p style="text-align: center; color: #4a5568; font-size: 14px; line-height: 1.5;">Live pricing • Floor plans • Design galleries • Deposit structures</p>
+                </div>
+
+                <!-- Always Up-to-Date Intelligence -->
+                <h3>📈 Always Up-to-Date Intelligence</h3>
+                <ul class="benefits">
+                    <li><strong>Realtor-first released pricing</strong> - Get access to pricing before it hits public marketing materials</li>
+                    <li><strong>Complete floor plan libraries</strong> - Every layout, square footage breakdown, and unit configuration in one place</li>
+                    <li><strong>Design inspiration galleries</strong> - Renderings, finishes, and interior design options for each project</li>
+                    <li><strong>Transparent deposit structures</strong> - Know exactly what's required upfront, at milestones, and at completion</li>
+                    <li><strong>Current builder incentives</strong> - Track which projects are offering cashback, upgrades, or other sweeteners</li>
+                    <li><strong>Updated as projects launch</strong> - Never miss a new release or pricing change</li>
+                </ul>
+
+                <!-- Centralized Comparison -->
+                <h3 style="margin-top: 25px;">🔍 Centralized Comparison Without the Tab Chaos</h3>
+                <ul class="benefits">
+                    <li><strong>Side-by-side project comparison</strong> - Pricing, timelines, locations, and amenities all in one view</li>
+                    <li><strong>No more hunting across 10+ developer websites</strong> - Everything aggregated in a single, easy-to-navigate hub</li>
+                    <li><strong>Quick-reference project summaries</strong> - Key facts at a glance so you can narrow your options fast</li>
+                    <li><strong>Location context for each development</strong> - Proximity to amenities, schools, outdoor recreation, and commute times</li>
+                </ul>
+
+                <!-- What's Included -->
+                <h3 style="margin-top: 25px;">📦 What's Included for Each Project</h3>
+                <ul class="benefits">
+                    <li><strong>Full pricing breakdown by unit type</strong> - Studios, 1BR, 2BR, 3BR, townhomes</li>
+                    <li><strong>Detailed floor plans with dimensions</strong> - Interactive PDFs you can download and review</li>
+                    <li><strong>Estimated completion dates</strong> - Know when you can actually move in</li>
+                    <li><strong>Builder reputation and track record</strong> - Who's building it and what their history looks like</li>
+                    <li><strong>Strata fee projections</strong> - No surprises on monthly carrying costs</li>
+                    <li><strong>Parking and storage options</strong> - What's included vs. what's extra</li>
+                </ul>
+
+                <!-- Perfect For Box -->
+                <div class="perfect-for">
+                    <h3>Perfect for:</h3>
+                    <ul>
+                        <li>Pre-sale buyers wanting to get in early on the best inventory</li>
+                        <li>First-time buyers navigating the new construction process</li>
+                        <li>Investors comparing ROI potential across multiple projects</li>
+                        <li>Downsizers seeking low-maintenance, modern living</li>
+                        <li>Vancouver/Toronto buyers relocating to Squamish for affordability and lifestyle</li>
+                        <li>Anyone tired of chasing developers for updated pricing and availability</li>
+                    </ul>
+                </div>
+
+                <!-- Testimonials -->
+                <div class="testimonials">
+                    <div class="testimonial">
+                        "This guide saved me months of research. The neighbourhood breakdowns helped us find the perfect family home in Valleycliffe!"
+                        <div class="testimonial-author">— Sarah M., Recent Buyer</div>
+                    </div>
+                    <div class="testimonial">
+                        "Eric walked with us every step of the way helping us understand each neighbourhood. He helped us walk away from deals he thought we'd regret. No flashy sales pitches. The most approachable human you could ask for."
+                        <div class="testimonial-author">— NT, Squamish Homebuyer</div>
+                    </div>
+                    <div class="testimonial">
+                        "We never felt pressured to make a decision faster than we were ready. Eric appreciated our many questions and was willing to chat through various scenarios. 10/10 recommend!"
+                        <div class="testimonial-author">— KT, First-Time Buyer</div>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="lastName">Last Name *</label>
-                <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
-                <div class="error-message" id="lastNameError">Please enter your last name</div>
-            </div>
+            <!-- Right Form -->
+            <div class="form-container">
+                <div id="leadForm">
+                    <h3>Get Instant Access</h3>
+                    <p class="form-subtitle">Join buyers who are staying ahead of Squamish's new development market</p>
 
-            <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" required autocomplete="email">
-                <div class="error-message" id="emailError">Please enter a valid email address</div>
-            </div>
+                    <form id="mainForm">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+                            <div class="error-message" id="firstNameError">Please enter your first name</div>
+                        </div>
 
-            <button type="submit" class="submit-btn" id="submitBtn">
-                Get Instant Access
-            </button>
-        </form>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
+                            <div class="error-message" id="lastNameError">Please enter your last name</div>
+                        </div>
 
-        <div class="success-message" id="successMessage">
-            <div class="success-icon">
-                <svg viewBox="0 0 52 52">
-                    <polyline points="14 27 22 35 38 19"/>
-                </svg>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required autocomplete="email">
+                            <div class="error-message" id="emailError">Please enter a valid email</div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            Get My Free Guide
+                        </button>
+
+                        <p class="privacy-text">
+                            We respect your privacy. Instant access + project updates as new developments launch. Unsubscribe anytime.
+                        </p>
+                    </form>
+                </div>
+
+                <div class="success-message" id="successMessage">
+                    <div class="success-icon">
+                        <svg viewBox="0 0 52 52">
+                            <polyline points="14 27 22 35 38 19"/>
+                        </svg>
+                    </div>
+                    <h2>Check Your Email!</h2>
+                    <p>Your New Development Hub is on its way. Check your inbox in the next 2 minutes for instant access.</p>
+                    <a href="#" class="access-btn" id="accessBtn">Access Your Guide Now</a>
+                </div>
             </div>
-            <h2>You're All Set!</h2>
-            <p>Explore your Squamish Neighbourhood Guide using the link below. We've also sent it to your inbox so you can bookmark it and look at the newest neighbourhood listings and local updates!</p>
-            <a href="#" class="access-btn" id="accessBtn" target="_blank" rel="noopener noreferrer">Access Your Guide Now</a>
         </div>
     </div>
 
+    <!-- Footer -->
+    <div class="footer">
+        <p><strong>Eric Johnson</strong> | REALTOR® | Engel & Völkers Squamish/Whistler</p>
+        <p style="margin-top: 8px;">604.828.5704 | info@corridorhomes.ca</p>
+    </div>
+
     <script>
-        // DOM elements
-        const form = document.getElementById('leadForm');
+        const form = document.getElementById('mainForm');
         const submitBtn = document.getElementById('submitBtn');
         const successMessage = document.getElementById('successMessage');
         const accessBtn = document.getElementById('accessBtn');
+        const leadForm = document.getElementById('leadForm');
 
-        // Form submission
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -297,7 +594,6 @@
                 return;
             }
 
-            // Disable submit button and show loading state
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="loading"></span>Processing...';
 
@@ -319,14 +615,10 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    // Show success
-                    form.style.display = 'none';
+                    leadForm.style.display = 'none';
                     successMessage.classList.add('active');
+                    accessBtn.href = data.accessUrl || 'https://new-builds-squamish-the--akehhlj.gamma.site/';
                     
-                    // Set the access link
-                    accessBtn.href = data.accessUrl || 'https://squamish-neighbourhood-g-b51q0ml.gamma.site/';
-                    
-                    // Track conversion (Google Ads conversion tracking)
                     if (window.gtag) {
                         gtag('event', 'conversion', {
                             'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
@@ -339,20 +631,29 @@
                 }
             } catch (error) {
                 console.error('Submission error:', error);
-                alert('There was an error processing your request. Please try again or contact us directly.');
+                alert('There was an error processing your request. Please try again or contact us directly at 604.828.5704');
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'Get Instant Access';
+                submitBtn.textContent = 'Get My Free Guide';
             }
         });
 
-        // Clear errors on input
+        function showError(elementId, message) {
+            const errorEl = document.getElementById(elementId);
+            errorEl.textContent = message;
+            errorEl.classList.add('active');
+        }
+
+        function hideError(elementId) {
+            const errorEl = document.getElementById(elementId);
+            if (errorEl) {
+                errorEl.classList.remove('active');
+            }
+        }
+
         document.querySelectorAll('input').forEach(input => {
             input.addEventListener('input', () => {
                 const errorId = input.id + 'Error';
-                const errorEl = document.getElementById(errorId);
-                if (errorEl) {
-                    errorEl.classList.remove('active');
-                }
+                hideError(errorId);
             });
         });
     </script>
