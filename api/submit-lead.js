@@ -39,7 +39,7 @@ async function handleLeadSubmission(req, res) {
 
   // Generate unique access token
   const accessToken = generateAccessToken();
-  const gammaUrl = process.env.GAMMA_URL || 'https://squamish-neighbourhood-g-b51q0ml.gamma.site/';
+  const gammaUrl = process.env.GAMMA_URL || 'https://new-builds-squamish-the--akehhlj.gamma.site/';
   const accessUrl = `${gammaUrl}?ref=${accessToken}`;
 
   // Prepare lead data
@@ -87,8 +87,8 @@ async function sendToLofty(leadData) {
     lastName: leadData.lastName,
     email: leadData.email,
     emails: [leadData.email],
-    source: leadData.source || 'Squamish Neighbourhoods Guide Download',
-    tags: ['Squamish Neighbourhoods', 'Website Lead', 'Email Only Lead'],
+    source: leadData.source || 'Squamish New Development Guide',
+    tags: ['New Development Guide', 'Website Lead', 'Email Only Lead'],
     notes: `Lead captured via email-only form. Access token: ${leadData.accessToken}`
   };
 
